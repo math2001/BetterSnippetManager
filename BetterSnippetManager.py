@@ -21,6 +21,15 @@ def computer_friendly(path):
     path = path.replace('/', os.path.sep)
     return path
 
+template = """<snippet>
+    <content><![CDATA[
+%s
+]]></content>
+    <tabTrigger>%s</tabTrigger>
+    <scope>%s</scope>
+    <description>%s</description>
+</snippet>
+"""
 
 class BsmList(sublime_plugin.WindowCommand):
 
@@ -94,6 +103,7 @@ class BsmCreate(sublime_plugin.TextCommand):
         if os.path.exists(file_path):
             if sublime.ok_cancel_dialog('Override %s?' % file_name) is False:
                 return self.ask_file_name()
+
 
         with open(file_path, 'wb') as file:
             snippet_xml = template % (self.snippet_text, self.trigger, self.scopes, self.description)
