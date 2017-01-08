@@ -1,0 +1,10 @@
+[
+    {
+        "caption": "BetterSnippetManager: List All Snippets",
+        "command": "bsm_list"
+    },
+    {
+        "caption": "BetterSnippetManager: Create New Snippet",
+        "command": "bsm_create"
+    }
+]
