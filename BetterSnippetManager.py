@@ -104,6 +104,9 @@ class BsmCreate(sublime_plugin.TextCommand):
             if sublime.ok_cancel_dialog('Override %s?' % file_name) is False:
                 return self.ask_file_name()
 
+        if not os.path.exists(os.path.dirname(file_path)):
+            os.makedirs(os.path.dirname(file_path))
+
 
         with open(file_path, 'wb') as file:
             snippet_xml = template % (self.snippet_text, self.trigger, self.scopes, self.description)
