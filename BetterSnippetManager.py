@@ -35,7 +35,7 @@ class BsmList(sublime_plugin.WindowCommand):
 
     """List every snippet in the User folder"""
 
-    def __list_all_snippets(self, path=None, all_snippets=[]):
+    def __list_all_snippets(self, path, all_snippets):
         if path is None: path = self.SNIPPETS_PATH
         for item in os.listdir(path):
             if os.path.isdir(os.path.join(path, item)):
@@ -59,10 +59,13 @@ class BsmList(sublime_plugin.WindowCommand):
         self.window.open_file(path, sublime.TRANSIENT)
 
     def run(self):
+        snippets_folder = get_settings().get('snippets_folder')
         self.SNIPPETS_PATH = os.path.join(sublime.packages_path(), 'User')
+        if snippets_folder:
+            self.SNIPPETS_PATH = os.path.join(self.SNIPPETS_PATH,
+                                              snippets_folder)
 
-        self.all_snippets = self.__list_all_snippets()
-
+        self.all_snippets = self.__list_all_snippets(self.SNIPPETS_PATH, [])
         self.window.show_quick_panel(self.all_snippets, self.on_done, 0, 0,
                                      self.on_highlighted)
 
