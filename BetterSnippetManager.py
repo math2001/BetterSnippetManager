@@ -89,6 +89,7 @@ class BsmCreate(sublime_plugin.TextCommand):
                                      None)
 
     def set_scopes(self, scopes):
+        self.scopes = scopes
         folder = self.scopes.split(' ')[0].split('.')[-1]
         self.window.show_input_panel('Folder: ', folder, self.set_folder, None,
                                      None)
@@ -122,12 +123,14 @@ class BsmCreate(sublime_plugin.TextCommand):
             os.makedirs(os.path.dirname(file_path))
 
 
-        with open(file_path, 'wb') as file:
-            snippet_xml = template % (self.snippet_content, self.trigger,
-                                      self.scopes, self.description)
-            if int(sublime.version()) >= 3000:
-                file.write(bytes(snippet_xml, 'UTF-8'))
-            else: # To support Sublime Text 2
+        snippet_content = template % (self.snippet_content, self.trigger,
+                                  self.scopes, self.description)
+        if int(sublime.version()) >= 3000:
+            self.window.run_command('open_file', {
+                'file': file_path,
+                'contents': snippet_content
+            })
+        else:
+            with open(file_path, 'wb') as file:
                 file.write(bytes(snippet_xml))
-
-        self.window.open_file(file_path)
+            self.window.open_file(file_path)
