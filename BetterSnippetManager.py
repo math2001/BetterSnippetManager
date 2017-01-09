@@ -31,7 +31,7 @@ template = """<snippet>
 </snippet>
 """
 
-class BsmList(sublime_plugin.WindowCommand):
+class BetterSnippetManagerEditCommand(sublime_plugin.WindowCommand):
 
     """List every snippet in the User folder"""
 
@@ -69,7 +69,10 @@ class BsmList(sublime_plugin.WindowCommand):
         self.window.show_quick_panel(self.all_snippets, self.on_done, 0, 0,
                                      self.on_highlighted)
 
-class BsmCreate(sublime_plugin.TextCommand):
+class BetterSnippetManagerCreateCommand(sublime_plugin.TextCommand):
+
+    def escape(self, string):
+        return string.replace('<', '&gt;').replace('>', '&lt;')
 
     def run(self, edit):
         v = self.view
@@ -82,21 +85,25 @@ class BsmCreate(sublime_plugin.TextCommand):
                                      None)
 
     def set_trigger(self, trigger):
-        self.trigger = trigger
+        self.trigger = self.escape(trigger)
         self.window.show_input_panel('Description: ', '', self.set_description,
                                      None, None)
 
     def set_description(self, description):
-        self.description = description
+        self.description = self.escape(description)
         scopes = self.scopes.replace(' ', ', ')
-        self.window.show_input_panel('Scope: ', scopes, self.set_scopes, None,
-                                     None)
+        self.window.show_input_panel('Scope: ', scopes, self.set_scopes,
+                                            None, None)
+        sel = view.sel()
+        sel.clear()
+        sel.add(sublime.Region(0, len(self.scopes.split(' ', 1)[0])))
+        view.run_command('invert_selection')
 
     def set_scopes(self, scopes):
-        self.scopes = scopes
+        self.scopes = self.escape(scopes)
         folder = self.scopes.split(' ')[0].split('.')[-1]
-        self.window.show_input_panel('Folder: ', folder, self.set_folder, None,
-                                     None)
+        view = self.window.show_input_panel('Folder: ', folder,
+                                            self.set_folder, None, None)
 
     def set_folder(self, folder):
         self.folder = folder
@@ -114,9 +121,8 @@ class BsmCreate(sublime_plugin.TextCommand):
                                         self.trigger))[0])))
 
     def make_snippet(self, file_name):
-        snippets_folder = get_settings().get('snippets_folder') or ''
         file_path = os.path.join(sublime.packages_path(), 'User',
-                                 snippets_folder,
+                                 get_settings().get('snippets_folder') or '',
                                  computer_friendly(self.folder), file_name)
 
         if not os.path.exists(os.path.dirname(file_path)):

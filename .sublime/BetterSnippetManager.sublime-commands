@@ -1,11 +1,11 @@
 [
     {
         "caption": "BetterSnippetManager: Edit Snippets",
-        "command": "bsm_list"
+        "command": "better_snippet_manager_edit"
     },
     {
         "caption": "BetterSnippetManager: Create New Snippet",
-        "command": "bsm_create"
+        "command": "better_snippet_manager_create"
     },
     {
         "caption": "Preferences: BetterSnippetManager Settings",

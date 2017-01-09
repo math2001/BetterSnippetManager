@@ -1,2 +1,8 @@
-Plugin:
-  ☐ specify start path (settings, and in command args)
+Fast:
+  ☐ add commands to menu
+  ☐ verbose command name
+
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+Archive:
+ ✔ specify start path (settings, and in command args) @done Tue 10 Jan 2017 at 10:01 @project(Plugin)
