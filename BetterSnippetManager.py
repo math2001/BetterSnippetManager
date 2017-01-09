@@ -115,9 +115,6 @@ class BsmCreate(sublime_plugin.TextCommand):
                                  snippets_folder,
                                  computer_friendly(self.folder), file_name)
 
-        if os.path.exists(file_path):
-            if sublime.ok_cancel_dialog('Override %s?' % file_name) is False:
-                return self.ask_file_name()
 
         if not os.path.exists(os.path.dirname(file_path)):
             os.makedirs(os.path.dirname(file_path))
@@ -131,6 +128,9 @@ class BsmCreate(sublime_plugin.TextCommand):
                 'contents': snippet_content
             })
         else:
+            if os.path.exists(file_path):
+                if not sublime.ok_cancel_dialog('Override %s?' % file_name):
+                    return self.ask_file_name()
             with open(file_path, 'wb') as file:
                 file.write(bytes(snippet_xml))
             self.window.open_file(file_path)
