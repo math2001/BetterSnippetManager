@@ -67,6 +67,7 @@ class BsmList(sublime_plugin.WindowCommand):
                                      self.on_highlighted)
 
 class BsmCreate(sublime_plugin.TextCommand):
+    
     def run(self, edit):
         v = self.view
         sels = v.sel()
@@ -115,10 +116,8 @@ class BsmCreate(sublime_plugin.TextCommand):
                                  snippets_folder,
                                  computer_friendly(self.folder), file_name)
 
-
         if not os.path.exists(os.path.dirname(file_path)):
             os.makedirs(os.path.dirname(file_path))
-
 
         snippet_content = template % (self.snippet_content, self.trigger,
                                   self.scopes, self.description)
