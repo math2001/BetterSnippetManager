@@ -23,6 +23,20 @@ Once this is done, it'll create the snippet file, and open it in Sublime Text fo
 
 *The content of the snippet is the content of your selection when you created ran `BetterSnippetManager: Create New Snippet` (it can be empty, it's just a little trick)*
 
+## All your snippets in one folder
+
+If you're use to put all you snippets inside a folder, you can configure BetterSnippetManager take this into consideration when listing and creating your snippets.
+
+You need to edit *BetterSnippetManager*'s settings (not your global ones). To do so, you can search up in the command palette `Preferences: BetterSnippetManager Settings`, or use the menus `Preferences → Packages Settings → BetterSnippetManager`.
+
+In the *right* file, you can add this:
+
+```json
+"snippets_folder": "my_snippet_folder"
+```
+
+and, like this, BetterSnippetManager will go straight into this folder (so don't list the snippet outside of it, which shouldn't be a problem).
+
 ## Installation
 
 Because it is not available on package control for now, you have to add this repo "manually" to your list.

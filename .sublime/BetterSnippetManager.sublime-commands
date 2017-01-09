@@ -1,0 +1,19 @@
+[
+    {
+        "caption": "BetterSnippetManager: Edit Snippets",
+        "command": "bsm_list"
+    },
+    {
+        "caption": "BetterSnippetManager: Create New Snippet",
+        "command": "bsm_create"
+    },
+    {
+        "caption": "Preferences: BetterSnippetManager Settings",
+        "command": "edit_settings",
+        "args": {
+            "base_file": "${packages}/BetterSnippetManager/.sublime/BetterSnippetManager.sublime-settings",
+            "default": "// Your settings for BetterSnippetManager. See the default file to see the different options. \n{\n\t\n}\n"
+        }
+    }
+
+]

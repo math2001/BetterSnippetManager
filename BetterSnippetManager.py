@@ -67,7 +67,7 @@ class BsmList(sublime_plugin.WindowCommand):
                                      self.on_highlighted)
 
 class BsmCreate(sublime_plugin.TextCommand):
-    
+
     def run(self, edit):
         v = self.view
         sels = v.sel()
