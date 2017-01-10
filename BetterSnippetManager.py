@@ -131,9 +131,11 @@ class BetterSnippetManagerCreateCommand(sublime_plugin.TextCommand):
         snippet_content = template % (self.snippet_content, self.trigger,
                                   self.scopes, self.description)
         if int(sublime.version()) >= 3000:
+            # escape $ because it's inserting a *snippet*, not just simple
+            # content. Thanks to #2
             self.window.run_command('open_file', {
                 'file': file_path,
-                'contents': snippet_content
+                'contents': snippet_content.replace('\\', '\\\\').replace('$', '\\$')
             })
         else:
             if os.path.exists(file_path):
