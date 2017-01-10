@@ -63,4 +63,8 @@ It depends of your needs:
 - If you intend to just use BetterSnippetManager, then pick the first solution (Package Control), **you'll get automatic update**.
 - On the opposite side, if you want to tweak it, use the second solution. Note that, to get updates, you'll have to `git pull`
 
+## How to open the [`README`](https://github.com/math2001/FileManager/blob/master/README.md)
+
+To open their README, some of the package add a command in the menus, others in the command palette, or other nowhere. None of those options are really good, escpecially the last one on ST3 because the packages are compressed. But, fortunatly, there is plugin that exists and will **solve this problem for us** (and he has a really cute name, don't you think?): [ReadmePlease](https://packagecontrol.io/packages/ReadmePlease). :tada:
+
 [snippets-doc]: http://docs.sublimetext.info/en/latest/extensibility/snippets.html
