@@ -23,6 +23,8 @@ The `file name` has to have the extension `.sublime-snippet` to be taken into ac
 
 Once this is done, it'll create the snippet file, and open it in Sublime Text for you.
 
+![demo creating Sublime Text snippets using BetterSnippetManager](demo/create.gif)
+
 *The content of the snippet is the content of your selection when you created ran `BetterSnippetManager: Create New Snippet` (it can be empty, it's just a little trick)*
 
 ### Edit existing snippets
@@ -76,3 +78,7 @@ It depends of your needs:
 To open their README, some of the package add a command in the menus, others in the command palette, or other nowhere. None of those options are really good, especially the last one on ST3 because the packages are compressed. But, fortunatly, there is plugin that exists and will **solve this problem for us** (and he has a really cute name, don't you think?): [ReadmePlease](https://packagecontrol.io/packages/ReadmePlease). :tada:
 
 [snippets-doc]: http://docs.sublimetext.info/en/latest/extensibility/snippets.html
+
+## Note
+
+In every screenshots, I was using the [Boxy Theme](https://packagecontrol.io/packages/Boxy%20Theme) (Monokai), with the corresponding color scheme. The font was *Droid Sans Mono*.
