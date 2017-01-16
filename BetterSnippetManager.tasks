@@ -1,7 +1,7 @@
 Fast:
-  ☐ add gif in readme
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ add gif in readme @done Mon 16 Jan 2017 at 15:42 @project(Fast)
  ✔ add commands to menu @done Thu 12 Jan 2017 at 11:49 @project(Fast)
  ✔ verbose command name @done Thu 12 Jan 2017 at 11:49 @project(Fast)
  ✔ specify start path (settings, and in command args) @done Tue 10 Jan 2017 at 10:01 @project(Plugin)

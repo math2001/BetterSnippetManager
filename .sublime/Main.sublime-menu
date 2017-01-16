@@ -6,6 +6,7 @@
             {
                 "id": "packages",
                 "caption": "Packages",
+                "mnemonic": "P",
                 "children": [
                     {
                         "caption": "BetterSnippetManager",
@@ -29,6 +30,8 @@
         "children": [
             {
                 "id": "package-settings",
+                "caption": "Packages Settings",
+                "mnemonic": "P",
                 "children": [
                     {
                         "caption": "BetterSnippetManager",
