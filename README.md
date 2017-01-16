@@ -47,12 +47,12 @@ and, like this, BetterSnippetManager will go straight into this folder (so don't
 
 ## Installation
 
-Because it is not available on package control for now, you have to add this repo "manually" to your list.
-
 ### Using package control
 
-1. Open up the command palette (`ctrl+shift+p`), and find `Package Control: Add Repository`. Then enter the URL of this repo: `https://github.com/math2001/BetterSnippetManager` in the input field.
-2. Open up the command palette again and find `Package Control: Install Package`, and just search for `BetterSnippetManager`. (just a normal install)
+1. Open up the command palette: <kbd>ctrl+shift+p</kbd>
+2. Search for `Package Control: Install Package`
+3. Search for `BetterSnippetManager`
+4. Hit <kbd>enter</kbd> :wink:
 
 ### Using the command line
 
@@ -69,7 +69,7 @@ git clone "https://github.com/math2001/BetterSnippetManager"
 It depends of your needs:
 
 - If you intend to just use BetterSnippetManager, then pick the first solution (Package Control), **you'll get automatic update**.
-- On the opposite side, if you want to tweak it, use the second solution. Note that, to get updates, you'll have to `git pull`
+- On the opposite side, if you want to tweak it, or even contribute (:+1:), use the second solution. Note that, to get updates, you'll have to `git pull`
 
 ## How to open the [`README`](https://github.com/math2001/FileManager/blob/master/README.md)
 
