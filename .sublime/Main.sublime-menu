@@ -13,7 +13,7 @@
                         "children": [
                             {
                                 "caption": "Edit Snippets",
-                                "commmand": "better_snippet_manager_edit"
+                                "command": "better_snippet_manager_edit"
                             },
                             {
                                 "caption": "Create New Snippet",
