@@ -7,6 +7,8 @@ The two command are available in the command palette.
 
 ## Usage
 
+### Create new snippets
+
 You can create a new snippet by selecting up in the command palette `BetterSnippetManager: Create New Snippet`.
 
 It's going to ask you different *snippet specific* questions: the `trigger`, the `description`, the `scope`.
@@ -22,6 +24,12 @@ The `file name` has to have the extension `.sublime-snippet` to be taken into ac
 Once this is done, it'll create the snippet file, and open it in Sublime Text for you.
 
 *The content of the snippet is the content of your selection when you created ran `BetterSnippetManager: Create New Snippet` (it can be empty, it's just a little trick)*
+
+### Edit existing snippets
+
+You can edit existing snippets by searching up in the command palette: `BetterSnippetManager: Edit Snippets`. It'll list all your snippets (event the ones that are in sub-folders). It'll open the hovered one in the background. Now, you just need to hit <kbd>enter</kbd> to open it up.
+
+![demo listing Sublime Text snippets using BetterSnippetManager](demo/edit.gif)
 
 ## All your snippets in one folder
 
