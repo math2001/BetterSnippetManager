@@ -1,5 +1,9 @@
 {
+    // which folder you want to store all your snippets in
+    // it can be set to null
     "snippet_folder": "snippets",
 
+    // SaneSnippet is a package which allows you to write your snippet
+    // with a yaml front matter. Check it out!
     "use_sane_snippets": false
 }
