@@ -3,7 +3,7 @@
 You can list all your snippets (even in infinite sub-folders, they're listed in one panel, for quick access)
 You can create some snippet interactively.
 
-The two command are available in the command palette.
+The two commands are available in the command palette.
 
 ## Usage
 
@@ -19,7 +19,7 @@ In addition, it's also going to ask you the `folder` to save this snippet in, an
 
 The folder name is defined with the scope you're currently in. So, if you're writing `JSON`, it's going to propose you to save this in a `json` folder (because the scope is `source.json`). You can of course change this (note that if you put nothing in, it's going to put it at the root of your folder (in this case `User`)).
 
-The `file name` has to have the extension `.sublime-snippet` to be taken into account by Sublime Text. So, it's added by default. The name alone is defined by the trigger you chose earlier in the process, but you can change this as well.
+The `filename` has to have the extension `.sublime-snippet` to be taken into account by Sublime Text. So, it's added by default. The name alone is defined by the trigger you chose earlier in the process, but you can change this as well.
 
 Once this is done, it'll create the snippet file, and open it in Sublime Text for you.
 
@@ -35,7 +35,7 @@ You can edit existing snippets by searching up in the command palette: `BetterSn
 
 ## All your snippets in one folder
 
-If you're use to put all you snippets inside a folder, you can configure BetterSnippetManager take this into consideration when listing and creating your snippets.
+If you're used to putting all your snippets inside a folder, you can configure BetterSnippetManager take this into consideration when listing and creating your snippets.
 
 You need to edit *BetterSnippetManager*'s settings (not your global ones). To do so, you can search up in the command palette `Preferences: BetterSnippetManager Settings`, or use the menus `Preferences → Packages Settings → BetterSnippetManager`.
 
@@ -46,6 +46,25 @@ In the *right* file, you can add this:
 ```
 
 and, like this, BetterSnippetManager will go straight into this folder (so don't list the snippet outside of it, which shouldn't be a problem).
+
+## [SaneSnippet][] is supported!
+
+The commands stay *exactly* the same, all you have to do is set this plugin setting `use_sane_snippet` to `true`!
+
+*Note: of course, you have to install [SaneSnippet][]*
+
+Here's what a Sane Snippet looks like:
+
+```
+---
+description: nice print for debug
+tabTrigger:  print
+scope:       source.python
+---
+print("$TM_FILENAME:$TM_LINE_NUMBER", $1)
+```
+
+Awesome, right?
 
 ## Installation
 
@@ -68,17 +87,19 @@ git clone "https://github.com/math2001/BetterSnippetManager"
 
 > Which solution do I choose?
 
-It depends of your needs:
+It depends on of your needs:
 
 - If you intend to just use BetterSnippetManager, then pick the first solution (Package Control), **you'll get automatic update**.
 - On the opposite side, if you want to tweak it, or even contribute (:+1:), use the second solution. Note that, to get updates, you'll have to `git pull`
 
 ## How to open the [`README`](https://github.com/math2001/FileManager/blob/master/README.md)
 
-To open their README, some of the package add a command in the menus, others in the command palette, or other nowhere. None of those options are really good, especially the last one on ST3 because the packages are compressed. But, fortunatly, there is plugin that exists and will **solve this problem for us** (and he has a really cute name, don't you think?): [ReadmePlease](https://packagecontrol.io/packages/ReadmePlease). :tada:
+To open their README, some of the packages add a command in the menus, others in the command palette, or other nowhere. None of those options are really good, especially the last one on ST3 because the packages are compressed. But, fortunately, there is a plugin that exists and will **solve this problem for us** (and he has a really cute name, don't you think?): [ReadmePlease](https://packagecontrol.io/packages/ReadmePlease). :tada:
 
 [snippets-doc]: http://docs.sublimetext.info/en/latest/extensibility/snippets.html
 
 ## Note
 
-In every screenshots, I was using the [Boxy Theme](https://packagecontrol.io/packages/Boxy%20Theme) (Monokai), with the corresponding color scheme. The font was *Droid Sans Mono*.
+In every screenshot, I was using the [Boxy Theme](https://packagecontrol.io/packages/Boxy%20Theme) (Monokai), with the corresponding color scheme. The font was *Droid Sans Mono*.
+
+[SaneSnippet]: https://packagecontrol.io/packages/SaneSnippets
