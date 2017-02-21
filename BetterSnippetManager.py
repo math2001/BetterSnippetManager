@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
-import sublime, sublime_plugin
 import os
+import sublime
+import sublime_plugin
+from .templates import templates
 
 def md(*args): sublime.message_dialog(' '.join([str(arg) for arg in args]))
 
@@ -21,27 +23,22 @@ def computer_friendly(path):
     path = path.replace('/', os.path.sep)
     return path
 
-template = """<snippet>
-    <content><![CDATA[
-%s
-]]></content>
-    <tabTrigger>%s</tabTrigger>
-    <scope>%s</scope>
-    <description>%s</description>
-</snippet>
-"""
+
+def get_snippet_extension():
+    return '.sane-snippet' if get_settings().get('use_sane_snippets') else '.sublime-snippet'
+
 
 class BetterSnippetManagerEditCommand(sublime_plugin.WindowCommand):
 
     """List every snippet in the User folder"""
 
-    def __list_all_snippets(self, path, all_snippets):
+    def __list_all_snippets(self, path, all_snippets, extension):
         if path is None: path = self.SNIPPETS_PATH
         for item in os.listdir(path):
             if os.path.isdir(os.path.join(path, item)):
                 self.__list_all_snippets(os.path.join(path, item),
-                                         all_snippets)
-            elif os.path.splitext(item)[1] == '.sublime-snippet':
+                                         all_snippets, extension)
+            elif os.path.splitext(item)[1] == extension:
                 all_snippets.append(
                     os.path.join(path, item) \
                         .replace(self.SNIPPETS_PATH, '') \
@@ -60,14 +57,16 @@ class BetterSnippetManagerEditCommand(sublime_plugin.WindowCommand):
 
     def run(self):
         snippets_folder = get_settings().get('snippets_folder')
+        extension = get_snippet_extension()
         self.SNIPPETS_PATH = os.path.join(sublime.packages_path(), 'User')
         if snippets_folder:
-            self.SNIPPETS_PATH = os.path.join(self.SNIPPETS_PATH,
-                                              snippets_folder)
+            self.SNIPPETS_PATH = os.path.join(self.SNIPPETS_PATH, snippets_folder)
 
-        self.all_snippets = self.__list_all_snippets(self.SNIPPETS_PATH, [])
-        self.window.show_quick_panel(self.all_snippets, self.on_done, 0, 0,
-                                     self.on_highlighted)
+        self.all_snippets = self.__list_all_snippets(self.SNIPPETS_PATH, [], extension)
+        if len(self.all_snippets) == 0:
+            return self.error_message("BetterSnippetManager: Didn't find any '{}' in the User "
+                                      "package".format(extension))
+        self.window.show_quick_panel(self.all_snippets, self.on_done, 0, 0, self.on_highlighted)
 
 class BetterSnippetManagerCreateCommand(sublime_plugin.TextCommand):
 
@@ -81,19 +80,16 @@ class BetterSnippetManagerCreateCommand(sublime_plugin.TextCommand):
         self.window = v.window()
         self.scopes = v.scope_name(sels[0].begin()).strip()
         self.snippet_content = "\n".join([v.substr(region) for region in sels])
-        self.window.show_input_panel('Trigger: ', '', self.set_trigger, None,
-                                     None)
+        self.window.show_input_panel('Trigger: ', '', self.set_trigger, None, None)
 
     def set_trigger(self, trigger):
         self.trigger = self.escape(trigger)
-        self.window.show_input_panel('Description: ', '', self.set_description,
-                                     None, None)
+        self.window.show_input_panel('Description: ', '', self.set_description, None, None)
 
     def set_description(self, description):
         self.description = self.escape(description)
         scopes = self.scopes.replace(' ', ', ')
-        self.window.show_input_panel('Scope: ', scopes, self.set_scopes,
-                                            None, None)
+        view = self.window.show_input_panel('Scope: ', scopes, self.set_scopes, None, None)
         sel = view.sel()
         sel.clear()
         sel.add(sublime.Region(0, len(self.scopes.split(' ', 1)[0])))
@@ -102,8 +98,7 @@ class BetterSnippetManagerCreateCommand(sublime_plugin.TextCommand):
     def set_scopes(self, scopes):
         self.scopes = self.escape(scopes)
         folder = self.scopes.split(' ')[0].split('.')[-1]
-        view = self.window.show_input_panel('Folder: ', folder,
-                                            self.set_folder, None, None)
+        view = self.window.show_input_panel('Folder: ', folder, self.set_folder, None, None)
 
     def set_folder(self, folder):
         self.folder = folder
@@ -111,16 +106,20 @@ class BetterSnippetManagerCreateCommand(sublime_plugin.TextCommand):
 
     def ask_file_name(self):
         input_view = self.window.show_input_panel('File Name: ',
-                                                  self.trigger \
-                                                    + '.sublime-snippet',
-                                                  self.make_snippet, None,
-                                                  None)
+                                                  self.trigger + get_snippet_extension(),
+                                                  self.make_snippet, None, None)
         sel = input_view.sel()
         sel.clear()
         sel.add(sublime.Region(0, len(os.path.splitext(os.path.basename(
                                         self.trigger))[0])))
 
     def make_snippet(self, file_name):
+
+        if get_settings().get('use_sane_snippets'):
+            template = templates.sane
+        else:
+            template = templates.xml
+
         file_path = os.path.join(sublime.packages_path(), 'User',
                                  get_settings().get('snippets_folder') or '',
                                  computer_friendly(self.folder), file_name)
@@ -128,8 +127,8 @@ class BetterSnippetManagerCreateCommand(sublime_plugin.TextCommand):
         if not os.path.exists(os.path.dirname(file_path)):
             os.makedirs(os.path.dirname(file_path))
 
-        snippet_content = template % (self.snippet_content, self.trigger,
-                                  self.scopes, self.description)
+        snippet_content = template.format(content=self.snippet_content, trigger=self.trigger,
+                                          scopes=self.scopes, description=self.description)
         if int(sublime.version()) >= 3000:
             # escape $ because it's inserting a *snippet*, not just simple
             # content. Thanks to #2

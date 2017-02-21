@@ -37,7 +37,7 @@
                         "caption": "BetterSnippetManager",
                         "command": "edit_settings",
                         "args": {
-                            "base_file": "${packages}/BetterSnippetManager/.sublime/BetterSnippetManager.sublime-settings",
+                            "base_file": "${packages}/BetterSnippetManager/BetterSnippetManager.sublime-settings",
                             "default": "// Your settings for BetterSnippetManager. See the default file to see the different options. \n{\n\tBetterSnippetManager\n}\n"
                         }
                     }
