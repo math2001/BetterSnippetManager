@@ -1,9 +1,10 @@
 Fast:
 
 Medium:
-  ☐ support SaneSnippet
+
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ support SaneSnippet @done Tue 21 Feb 2017 @project(Medium)
  ✔ add gif in readme @done Mon 16 Jan 2017 at 15:42 @project(Fast)
  ✔ add commands to menu @done Thu 12 Jan 2017 at 11:49 @project(Fast)
  ✔ verbose command name @done Thu 12 Jan 2017 at 11:49 @project(Fast)
