@@ -114,9 +114,7 @@ class BetterSnippetManagerCreateCommand(sublime_plugin.TextCommand):
     def set_scopes(self, scopes):
         self.scopes = self.escape(scopes)
         folder = self.scopes.split(" ")[0].split(".")[-1]
-        view = self.window.show_input_panel(
-            "Folder: ", folder, self.set_folder, None, None
-        )
+        self.window.show_input_panel("Folder: ", folder, self.set_folder, None, None)
 
     def set_folder(self, folder):
         self.folder = folder
@@ -160,22 +158,12 @@ class BetterSnippetManagerCreateCommand(sublime_plugin.TextCommand):
             scopes=self.scopes,
             description=self.description,
         )
-        if int(sublime.version()) >= 3000:
-            # escape $ because it's inserting a *snippet*, not just simple
-            # content. Thanks to #2
-            self.window.run_command(
-                "open_file",
-                {
-                    "file": file_path,
-                    "contents": snippet_content.replace("\\", "\\\\").replace(
-                        "$", "\\$"
-                    ),
-                },
-            )
-        else:
-            if os.path.exists(file_path):
-                if not sublime.ok_cancel_dialog("Override %s?" % file_name):
-                    return self.ask_file_name()
-            with open(file_path, "wb") as file:
-                file.write(bytes(snippet_xml))
-            self.window.open_file(file_path)
+        # escape $ because it's inserting a *snippet*, not just simple
+        # content. Thanks to #2
+        self.window.run_command(
+            "open_file",
+            {
+                "file": file_path,
+                "contents": snippet_content.replace("\\", "\\\\").replace("$", "\\$"),
+            },
+        )
