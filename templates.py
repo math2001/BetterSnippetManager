@@ -1,16 +1,18 @@
 # -*- encoding: utf-8 -*-
 
+
 class templates:
     pass
 
+
 templates.xml = """\
 <snippet>
-    <content><![CDATA[
+\t<content><![CDATA[
 {content}
 ]]></content>
-    <tabTrigger>{trigger}</tabTrigger>
-    <scope>{scopes}</scope>
-    <description>{description}</description>
+\t<tabTrigger>{trigger}</tabTrigger>
+\t<scope>{scopes}</scope>
+\t<description>{description}</description>
 </snippet>
 """
 
