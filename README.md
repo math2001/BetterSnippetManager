@@ -96,7 +96,7 @@ It depends on of your needs:
 
 To open their README, some of the packages add a command in the menus, others in the command palette, or other nowhere. None of those options are really good, especially the last one on ST3 because the packages are compressed. But, fortunately, there is a plugin that exists and will **solve this problem for us** (and he has a really cute name, don't you think?): [ReadmePlease](https://packagecontrol.io/packages/ReadmePlease). :tada:
 
-[snippets-doc]: http://docs.sublimetext.info/en/latest/extensibility/snippets.html
+[snippets-doc]: http://docs.sublimetext.io/guide/extensibility/snippets.html
 
 ## Note
 
